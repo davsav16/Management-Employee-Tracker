@@ -38,7 +38,8 @@ const mainMenu = function(){
             addEmployee();
         }
         else if (data.choices === 'Update Employee Role') {
-            console.log("Update Employee")
+            console.log("Update Employee");
+            update();
         }
         else if (data.choices === 'Exit') {
             console.log("GOODBYE!! :)")
@@ -205,6 +206,47 @@ async function addEmployee() {
     console.log('===================================================');
     mainMenu();
 };
+
+async function update() {
+    const empInfo = await db.promise().query(`SELECT * FROM employees;`);
+    let empList = empInfo[0].map((name) => {
+        return {
+            name: name.first_name.concat(" ", name.last_name),
+            value: name.id
+        }
+    })
+    const rolesInfo = await db.promise().query(`SELECT * FROM roles;`);
+    let rolesList = rolesInfo[0].map((role) => {
+        return {
+            name: role.title,
+            value: role.id
+        }
+    });
+
+    const {empId, roleId} = await inquirer.prompt([
+        {
+            type: "list",
+            name: "empId",
+            message: "What is the name of the employee you would like to update?",
+            choices: empList
+        },
+        {
+            type: "list",
+            name: "roleId",
+            message: "What would you like their new role to be?",
+            choices: rolesList
+        }
+    ]);
+
+    const sql = `UPDATE employees SET role_id = ? WHERE id = ?`;
+    const params = [roleId, empId];
+    await db.promise().query(sql, params);
+
+    console.log("=================================");
+    console.log(`${empList.name} has had their role updated.`);
+    console.log("=================================");
+    mainMenu();
+}
 
 
 

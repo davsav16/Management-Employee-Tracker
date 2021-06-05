@@ -1,3 +1,4 @@
+
 INSERT INTO departments (depname)
 VALUES
     ('Sales'),
@@ -5,6 +6,7 @@ VALUES
     ('Finance'),
     ('Legal'),
     ('Customer Support');
+
 
 INSERT INTO roles (title, salary, department_id)
 VALUES
@@ -38,37 +40,38 @@ VALUES
     ('CX Senior', 48000, 5),
     ('CX Representative', 37000, 5);
 
-INSERT INTO employees (first_name, last_name, role_id)
+
+INSERT INTO employees (first_name, last_name, role_id, manager_id)
     VALUES
-    ('Donald', 'James', 1),
-    ('Frank', 'Williams', 2 ),
-    ('Fannie', 'May', 3),
-    ('Luke', 'Skywalker', 4),
-    ('Jason', 'Due', 5),
-    ('Michael', 'Jordan', 6),
-    ('Donnovan', 'Mitchel', 7),
-    ('Sam', 'Johnson', 8),
-    ('Charles', 'Barkly', 9),
-    ('Leia', 'Organa', 10),
-    ('Han', 'Solo', 11),
-    ('David', 'McDonald', 12),
-    ('Kendall', 'McGrath', 13),
-    ('Jessica', 'James', 14),
-    ('Savanna', 'Lopez', 15),
-    ('Emily', 'Johnston', 16),
-    ('Lisa', 'Solo', 17),
-    ('Ryan', 'Kartchner', 18),
-    ('Quin', 'Snyder', 19),
-    ('Marnie', 'Smith', 20),
-    ('Joseph', 'Michaelson', 21),
-    ('Maddy', 'Monson', 22),
-    ('Taylor', 'Franz', 23),
-    ('Israel', 'Thomas', 24),
-    ('Rudy', 'Gobert', 25),
-    ('Bruce', 'Evans', 26),
-    ('Michael', 'Scott', 27),
-    ('Holly', 'Holland', 28),
-    ('Philip', 'Johnson', 29);
+    ('Donald', 'James', 1, null),
+    ('Frank', 'Williams', 2, 1),
+    ('Fannie', 'May', 3, 1),
+    ('Luke', 'Skywalker', 4, null),
+    ('Jason', 'Due', 5, 4),
+    ('Michael', 'Jordan', 6, 4),
+    ('Donnovan', 'Mitchel', 7, 4),
+    ('Sam', 'Johnson', 8, 4),
+    ('Charles', 'Barkly', 9, 4),
+    ('Leia', 'Organa', 10, null),
+    ('Han', 'Solo', 11, 10),
+    ('David', 'McDonald', 12, 10),
+    ('Kendall', 'McGrath', 13, 10),
+    ('Jessica', 'James', 14, 10),
+    ('Savanna', 'Lopez', 15, 10),
+    ('Emily', 'Johnston', 16, 10),
+    ('Lisa', 'Solo', 17, null),
+    ('Ryan', 'Kartchner', 18, 17),
+    ('Quin', 'Snyder', 19, 17),
+    ('Marnie', 'Smith', 20, 17),
+    ('Joseph', 'Michaelson', 21, 17),
+    ('Maddy', 'Monson', 22, 17),
+    ('Taylor', 'Franz', 23, 17),
+    ('Israel', 'Thomas', 24, null),
+    ('Rudy', 'Gobert', 25, 24),
+    ('Bruce', 'Evans', 26, 24),
+    ('Michael', 'Scott', 27, 24),
+    ('Holly', 'Holland', 28, 24),
+    ('Philip', 'Johnson', 29, 24);
    
 
 

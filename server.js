@@ -42,35 +42,39 @@ const mainMenu = function(){
             update();
         }
         else if (data.choices === 'Exit') {
-            console.log("GOODBYE!! :)")
+            end();
         }
     })
 }
 
+async function end() {
+    console.log("GOODBYE!! :)");
+    process.exit(1)
+};
+
+// View all functions
 async function allDepartments() {
     const sql = `SELECT * FROM departments`;
 
     db.query(sql, (err, rows) => {
         if (err) throw err;
-        console.log('============');
+        console.log('========================================================================');
         console.table(rows);
-        console.log('============');
+        console.log('========================================================================');
         mainMenu();
     })
 };
-
 async function allRoles() {
     const sql = `SELECT roles.title, roles.id, departments.depname AS department, roles.salary FROM roles LEFT JOIN departments ON roles.department_id = departments.id`;
 
     db.query(sql, (err, rows) => {
         if (err) throw err;
-        console.log('============');
+        console.log('===========================================================================');
         console.table(rows);
-        console.log('============');
+        console.log('===========================================================================');
         mainMenu();
     })
 };
-
 async function allEmployees() {
     const sql = ` SELECT
                     employees.id,
@@ -85,16 +89,16 @@ async function allEmployees() {
                  LEFT JOIN roles ON employees.role_id = roles.id
                  LEFT JOIN departments ON departments.id = roles.department_id
     `;
-
     db.query(sql, (err, rows) => {
         if (err) throw err;
-        console.log('============');
+        console.log('==========================================================================');
         console.table(rows);
-        console.log('============');
+        console.log('==========================================================================');
         mainMenu();
     })
 };
 
+// Add functions
 async function addDepartment() {
     inquirer
     .prompt({
@@ -105,7 +109,6 @@ async function addDepartment() {
         return addDepTable(answer);
     })
 };
-
 async function addDepTable (answer) {
     const sql = `INSERT INTO departments (depname) VALUES (?)`;
     const params = [answer.depname];
@@ -113,13 +116,12 @@ async function addDepTable (answer) {
     db.query(sql, params, (err, result) => {
         if (err) throw err;
         console.log(params);
-        console.log("===========");
+        console.log("===============================");
         console.log("You have added a new department");
-        console.log("===========");
+        console.log("===============================");
         mainMenu();
     });
 };
-
 async function addRole () {
     const depInfo = await db.promise().query(`SELECT * FROM departments`);
     let deptList = depInfo[0].map((names) => {
@@ -150,12 +152,11 @@ async function addRole () {
     const params = [roleInf.title, roleInf.salary, roleInf.department];
     await db.promise().query(sql, params);
     
-    console.log("========================");
+    console.log("============================================");
     console.log(`The role of ${roleInf.title} has been added.`);
-    console.log("========================");
+    console.log("============================================");
     mainMenu();
 };
-
 async function addEmployee() {
     const manInfo = await db.promise().query('SELECT * FROM employees WHERE manager_id IS NULL;');
     let manList = manInfo[0].map((names) => {
@@ -201,9 +202,9 @@ async function addEmployee() {
     const params = [newEmp.first_name, newEmp.last_name, newEmp.role, newEmp.manager];
     await db.promise().query(sql, params);
 
-    console.log('===================================================');
+    console.log('=======================================================================');
     console.log(`${newEmp.first_name} ${newEmp.last_name} has been added as an employee.`);
-    console.log('===================================================');
+    console.log('=======================================================================');
     mainMenu();
 };
 
@@ -242,19 +243,17 @@ async function update() {
     const params = [roleId, empId];
     await db.promise().query(sql, params);
 
-    console.log("=================================");
-    console.log(`${empList.name} has had their role updated.`);
-    console.log("=================================");
+    console.log("========================================");
+    console.log("The employee has had their role updated.");
+    console.log("========================================");
     mainMenu();
 }
-
-
 
 function start() {
     console.log("============================");
     console.log("      WELCOME MANAGER,      ");
     console.log("           TO THE           ");
-    console.log("      EMPLOYEE TRACKER      ");
+    console.log("      EMPLOYEE TRACKER!      ");
     console.log("============================");
     mainMenu();
 }

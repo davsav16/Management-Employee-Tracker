@@ -1,4 +1,4 @@
-INSERT INTO departments (name)
+INSERT INTO departments (depname)
 VALUES
     ('Sales'),
     ('Engineering'),
@@ -36,7 +36,7 @@ VALUES
     ('CX Manager', 100000, 5),
     ('CX Lead', 65000, 5),
     ('CX Senior', 48000, 5),
-    ('CX Representative', 37000, 5)
+    ('CX Representative', 37000, 5);
 
 INSERT INTO employees (first_name, last_name, role_id)
     VALUES

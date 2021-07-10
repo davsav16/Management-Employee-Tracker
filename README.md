@@ -1,7 +1,7 @@
 # Employee Tracker Database
 
 ## User Story
-To be used by management to create and update employee roles, departments and roles in a company. If you would like to use this, please clone the code to your local device, navigate to the code and then install Node, Inquierer, and MySGL.
+To be used by management to create and update employee roles, departments and roles in a company. If you would like to use this, please clone the code to your local device, navigate to the code and then install Node, Inquierer, and MySQL.
 
 ## Languages Used
 - Javascript
